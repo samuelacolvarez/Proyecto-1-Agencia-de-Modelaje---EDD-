@@ -59,7 +59,7 @@ public class Modelo extends Persona {
         System.out.println("Estatura: " + this.estatura);
         System.out.println("Categoria: " + this.Categoria);
         System.out.println("Disponibilidad: " + this.disponibilidad);
-        IO.println("Identificacion: " + this.identificacion);
+        System.out.println("Identificacion: " + this.identificacion);
     }
 
     @Override

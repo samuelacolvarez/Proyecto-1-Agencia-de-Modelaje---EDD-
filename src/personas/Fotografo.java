@@ -29,10 +29,10 @@ public class Fotografo extends Persona {
     }
 
     public void mostrarInformacion() {
-        IO.println("Especialidad: " + this.especialidad);
-        IO.println("Años de experiencia "+ this.aniosExperiencia);
+        System.out.println("Especialidad: " + this.especialidad);
+        System.out.println("Años de experiencia "+ this.aniosExperiencia);
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Contacto: " + this.contacto);
-        IO.println("Identificacion: " + this.identificacion);
+        System.out.println("Identificacion: " + this.identificacion);
     }
 }

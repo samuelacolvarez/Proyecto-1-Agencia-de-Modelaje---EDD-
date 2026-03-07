@@ -1,3 +1,5 @@
+package lugar;
+
 public class Lugar {
     private String nombre;
     private String direccion;
