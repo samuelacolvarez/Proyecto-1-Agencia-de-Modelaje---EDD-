@@ -40,7 +40,7 @@ public abstract class Evento {
             System.out.println("No se pueden agregar más modelo");
         }
     }
-    public void agregarFotografos(String fotografo){
+    public void agregarFotografos(Fotografo fotografo){
         if(contadorFotografos < fotografos.length){
             fotografos[contadorFotografos] = fotografo;
             contadorFotografos++;
