@@ -32,7 +32,7 @@ public abstract class Evento {
     public abstract void mostrarDetalles();
     public abstract String tipoEvento();
 
-    public void agregarModelos(String modelo){
+    public void agregarModelos(Modelo modelo){
         if(contadorModelos < modelos.length){
             modelos[contadorModelos] = modelo;
             contadorModelos++;
