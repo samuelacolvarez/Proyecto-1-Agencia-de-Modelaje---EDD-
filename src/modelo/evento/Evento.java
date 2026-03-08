@@ -23,6 +23,12 @@ public abstract class Evento {
         fotografos = new Fotografo[capacidad];
     }
 
+    public String getNombre() { return nombre; }
+
+    public Date getFecha() {return fecha;}
+
+    public String getLugar() {return lugar;}
+
     public abstract void mostrarDetalles();
     public abstract String tipoEvento();
 
