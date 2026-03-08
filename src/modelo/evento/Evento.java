@@ -1,4 +1,6 @@
-package evento;
+package modelo.evento;
+import modelo.Fotografo;
+import modelo.Modelo;
 
 import java.util.Date;
 
