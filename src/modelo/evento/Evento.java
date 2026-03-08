@@ -8,8 +8,8 @@ public abstract class Evento {
     protected String nombre;
     protected Date fecha;
     protected String lugar;
-    private String[] modelos;
-    private String[] fotografos;
+    private Modelo[] modelos;
+    private Fotografo[] fotografos;
 
     private int contadorModelos;
     private int contadorFotografos;
