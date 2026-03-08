@@ -19,8 +19,8 @@ public abstract class Evento {
         this.nombre = nombre;
         this.fecha = fecha;
         this.lugar = lugar;
-        modelos = new String[capacidad];
-        fotografos = new String[capacidad];
+        modelos = new Modelo[capacidad];
+        fotografos = new Fotografo[capacidad];
     }
 
     public abstract void mostrarDetalles();
