@@ -115,4 +115,20 @@ public class Agencia {
             }
         }
     }
+
+    public int getCantidadModelos() {
+        return cantidadModelos;
+    }
+
+    public int getCantidadFotografos() {
+        return cantidadFotografos;
+    }
+
+    public int getCantidadEventos() {
+        return cantidadEventos;
+    }
+
+    public int getCantidadLugares() {
+        return cantidadlugares;
+    }
 }
