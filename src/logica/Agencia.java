@@ -1,9 +1,8 @@
-package agencia;
-
-import lugar.Lugar;
-import evento.Evento;
-import personas.Fotografo;
-import personas.Modelo;
+package logica;
+import modelo.Lugar;
+import modelo.evento.Evento;
+import modelo.Fotografo;
+import modelo.Modelo;
 
 public class Agencia {
     private Modelo[] modelos;
