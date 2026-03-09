@@ -22,7 +22,7 @@ public class PanelModelos extends JPanel {
     private DefaultTableModel modeloTabla;
 
 
-    // ─── Constructor ──────────────────────────────────────────────────────
+    //Constructor
     public PanelModelos(Agencia agencia) {
         this.agencia = agencia;
 
@@ -35,7 +35,7 @@ public class PanelModelos extends JPanel {
         actualizarTabla();
     }
 
-    // ─── FORMULARIO ───────────────────────────────────────────────────────
+    // FORMULARIO
     private JPanel crearFormulario() {
 
         JPanel panel = new JPanel();
@@ -79,7 +79,7 @@ public class PanelModelos extends JPanel {
         return panel;
     }
 
-    // ─── TABLA ────────────────────────────────────────────────────────────
+    // TABLA
     private JScrollPane crearTabla() {
 
         // Definir los nombres de las columnas
@@ -219,7 +219,7 @@ public class PanelModelos extends JPanel {
         chkDisponible.setSelected(true);
     }
 
-    //─── ACTUALIZAR TABLA ─────────────────────────────────────────────────
+    //ACTUALIZAR TABLA
     private void actualizarTabla() {
 
         modeloTabla.setRowCount(0);
