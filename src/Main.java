@@ -11,5 +11,13 @@ public class Main {
             // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
             System.out.println("i = " + i);
         }
+import vista.VentanaPrincipal;
+
+public class Main {
+    public static void main(String[] args) {
+
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new VentanaPrincipal();
+        });
     }
 }
