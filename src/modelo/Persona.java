@@ -1,4 +1,4 @@
-package personas;
+package modelo;
 
 import java.util.UUID;
 
