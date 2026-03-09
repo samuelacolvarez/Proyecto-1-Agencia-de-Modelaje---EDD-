@@ -16,11 +16,11 @@ public class GestorArchivos {
             for (int i = 0; i < cantidad; i++) {
                 Modelo m = modelos[i];
                 pw.println(
-                        m.getCodigo() + ";" +   // UUID → String para guardar
+                        m.getCodigo() + ";" +
                                 m.getNombre()         + ";" +
                                 m.getIdentificacion() + ";" +
                                 m.getContacto()       + ";" +
-                                m.getEstatura()       + ";" +   // float
+                                m.getEstatura()       + ";" +
                                 m.getCategoria()      + ";" +
                                 m.getDisponibilidad()
                 );
@@ -102,7 +102,7 @@ public class GestorArchivos {
                         partes[1],
                         partes[2],
                         partes[3],
-                        Integer.parseInt(partes[4])  // anios es int, no double
+                        Integer.parseInt(partes[4])
                 );
                 cantidad++;
             }
@@ -151,7 +151,7 @@ public class GestorArchivos {
                         partes[0],
                         partes[1],
                         partes[2],
-                        Integer.parseInt(partes[3]),  // capacidad es int
+                        Integer.parseInt(partes[3]),
                         partes[4]
                 );
                 cantidad++;
