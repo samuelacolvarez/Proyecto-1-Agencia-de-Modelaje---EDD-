@@ -206,7 +206,7 @@ public class PanelModelos extends JPanel {
         }catch (AlturaMinimaException e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "La estatura debe ser un número mayor o igual a 1.85",
+                    "La estatura debe ser un número mayor o igual a 1.8",
                     "Error de formato",
                     JOptionPane.ERROR_MESSAGE
             );
