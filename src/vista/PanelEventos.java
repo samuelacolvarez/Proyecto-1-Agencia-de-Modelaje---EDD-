@@ -246,10 +246,8 @@ public class PanelEventos extends JPanel {
                     parsearFecha(txtFecha.getText().trim()),  // String → Date
                     lugar.getNombre(),
                     capacidad,
-                    capacidad,
                     txtPatrocinador.getText().trim()
             );
-
         } else {
 
             // Validar campos de evento privado
@@ -269,6 +267,7 @@ public class PanelEventos extends JPanel {
                     cbConfidencialidad.getSelectedItem().toString()
             );
         }
+        if ( parsearFecha(txtFecha.getText().trim())==null) return;
 
         // Asignar modelos seleccionados en la lista
         int[] indicesModelos = listaModelosDisponibles.getSelectedIndices();
@@ -369,7 +368,7 @@ public class PanelEventos extends JPanel {
                     "Formato de fecha incorrecto. Usa DD/MM/AAAA",
                     "Error de fecha",
                     JOptionPane.WARNING_MESSAGE);
-            return new java.util.Date(); // devuelve fecha actual si hay error
+            return null;
         }
     }
 }

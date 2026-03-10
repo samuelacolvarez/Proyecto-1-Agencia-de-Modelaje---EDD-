@@ -3,13 +3,13 @@ package modelo.evento;
 import java.util.Date;
 
 public class EventoPublico extends Evento{
-    private int capacidadAsistente;
+
     private String patrocinador;
 
     public EventoPublico(String nombre, Date fecha, String lugar,
-                         int capacidad, int capacidadAsistente, String patrocinador) {
+                         int capacidad,String patrocinador) {
         super(nombre, fecha, lugar, capacidad);
-        this.capacidadAsistente = capacidadAsistente;
+
         this.patrocinador = patrocinador;
     }
     @Override
@@ -18,7 +18,6 @@ public class EventoPublico extends Evento{
         System.out.println("Nombre: " + nombre);
         System.out.println("Fecha: " + fecha);
         System.out.println("Lugar: " + lugar);
-        System.out.println("Capacidad Asistente: " + capacidadAsistente);
         System.out.println("Patrocinador: " + patrocinador);
     }
     @Override
