@@ -158,7 +158,7 @@ public class PanelLugares extends JPanel {
     }
 
 
-    // ─── ACCIÓN: LIMPIAR ──────────────────────────────────────────────────
+    // LIMPIAR
     private void limpiarCampos() {
         txtNombre.setText("");
         txtDireccion.setText("");
@@ -167,7 +167,7 @@ public class PanelLugares extends JPanel {
         cbTipoLugar.setSelectedIndex(0);
     }
 
-    // ─── ACTUALIZAR TABLA ─────────────────────────────────────────────────
+    //ACTUALIZAR TABLA
     private void actualizarTabla() {
         modeloTabla.setRowCount(0);
 

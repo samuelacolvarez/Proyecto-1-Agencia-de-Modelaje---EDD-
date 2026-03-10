@@ -25,9 +25,6 @@ public class PanelEventos extends JPanel {
     private JTextField txtCliente;
     private JComboBox<String> cbConfidencialidad;
 
-    // Panel que cambia según el tipo de evento
-    // CardLayout permite tener varios paneles apilados
-    // y mostrar solo uno a la vez, como cartas en un mazo
     private JPanel panelDinamico;
     private CardLayout cardLayout;
 
@@ -44,7 +41,7 @@ public class PanelEventos extends JPanel {
         this.agencia = agencia;
         setLayout(new BorderLayout());
 
-        // Panel superior: formulario + asignaciones lado a lado
+        // Panel superior
         JPanel panelSuperior = new JPanel(new GridLayout(1, 2, 10, 0));
         panelSuperior.add(crearFormulario());
         panelSuperior.add(crearPanelAsignacion());
@@ -57,25 +54,20 @@ public class PanelEventos extends JPanel {
         actualizarCombos();
     }
 
-    // ─── FORMULARIO PRINCIPAL ─────────────────────────────────────────────
+    //  FORMULARIO PRINCIPAL
     private JPanel crearFormulario() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder("Datos del Evento"));
 
-        // Campos comunes
         JPanel comunes = new JPanel(new GridLayout(0, 2, 10, 5));
 
         txtNombre = new JTextField();
         txtFecha  = new JTextField();
         txtFecha.setToolTipText("Formato: DD/MM/AAAA");
-        // setToolTipText muestra un mensaje cuando el usuario
-        // pasa el mouse por encima del campo
 
         cbLugar = new JComboBox<>();
-        // Se llena dinámicamente con los lugares registrados
 
         cbTipoEvento = new JComboBox<>(new String[]{"Público", "Privado"});
-        // Cuando cambia el tipo, cambia el panel dinámico
         cbTipoEvento.addActionListener(e -> cambiarTipoEvento());
 
         comunes.add(new JLabel("Nombre evento:")); comunes.add(txtNombre);
@@ -83,8 +75,6 @@ public class PanelEventos extends JPanel {
         comunes.add(new JLabel("Lugar:"));         comunes.add(cbLugar);
         comunes.add(new JLabel("Tipo:"));          comunes.add(cbTipoEvento);
 
-        // Panel dinámico con CardLayout
-        // Tiene dos "cartas": una para público y otra para privado
         cardLayout    = new CardLayout();
         panelDinamico = new JPanel(cardLayout);
         panelDinamico.add(crearPanelPublico(),  "Público");
@@ -96,7 +86,7 @@ public class PanelEventos extends JPanel {
         return panel;
     }
 
-    // ─── PANEL DATOS EVENTO PÚBLICO ───────────────────────────────────────
+    //PANEL DATOS EVENTO PÚBLICO
     private JPanel crearPanelPublico() {
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Datos Evento Público"));
@@ -110,7 +100,7 @@ public class PanelEventos extends JPanel {
         return panel;
     }
 
-    // ─── PANEL DATOS EVENTO PRIVADO ───────────────────────────────────────
+    // PANEL DATOS EVENTO PRIVADO
     private JPanel crearPanelPrivado() {
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Datos Evento Privado"));
@@ -126,7 +116,7 @@ public class PanelEventos extends JPanel {
         return panel;
     }
 
-    // ─── PANEL DE ASIGNACIÓN ──────────────────────────────────────────────
+    // PANEL DE ASIGNACIÓN
     private JPanel crearPanelAsignacion() {
         JPanel panel = new JPanel(new GridLayout(2, 1, 0, 10));
         panel.setBorder(BorderFactory.createTitledBorder("Asignar al Evento"));
@@ -136,8 +126,6 @@ public class PanelEventos extends JPanel {
         panelModelos.setBorder(BorderFactory.createTitledBorder("Modelos disponibles"));
 
         listaModelosDisponibles = new JList<>();
-        // MULTIPLE_INTERVAL_SELECTION permite seleccionar varios
-        // manteniendo Ctrl o Shift
         listaModelosDisponibles.setSelectionMode(
                 ListSelectionModel.MULTIPLE_INTERVAL_SELECTION
         );
@@ -161,7 +149,7 @@ public class PanelEventos extends JPanel {
         return panel;
     }
 
-    // ─── TABLA ────────────────────────────────────────────────────────────
+    // TABLA
     private JScrollPane crearTabla() {
         String[] columnas = {
                 "Nombre", "Fecha", "Lugar", "Tipo", "Detalle"
@@ -181,7 +169,7 @@ public class PanelEventos extends JPanel {
         return new JScrollPane(tabla);
     }
 
-    // ─── BOTONES ──────────────────────────────────────────────────────────
+    // BOTONES
     private JPanel crearBotones() {
         JPanel panel = new JPanel(new FlowLayout());
 
@@ -200,20 +188,15 @@ public class PanelEventos extends JPanel {
         return panel;
     }
 
-    // ─── ACCIÓN: CAMBIAR TIPO DE EVENTO ──────────────────────────────────
+    //CAMBIAR TIPO DE EVENTO
     private void cambiarTipoEvento() {
-        // CardLayout muestra la "carta" cuyo nombre coincide
-        // con el texto seleccionado en el combo
         String tipo = cbTipoEvento.getSelectedItem().toString();
         cardLayout.show(panelDinamico, tipo);
-        // Si seleccionas "Público" muestra el panel público
-        // Si seleccionas "Privado" muestra el panel privado
     }
 
-    // ─── ACCIÓN: CREAR EVENTO ─────────────────────────────────────────────
+    // CREAR EVENTO ─────────────────────────────────────────────
     private void crearEvento() {
 
-        // Validar campos comunes
         if (txtNombre.getText().trim().isEmpty() ||
                 txtFecha.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -289,8 +272,6 @@ public class PanelEventos extends JPanel {
 
         // Asignar modelos seleccionados en la lista
         int[] indicesModelos = listaModelosDisponibles.getSelectedIndices();
-        // getSelectedIndices() devuelve un arreglo con los índices
-        // de todos los elementos seleccionados en la lista
         for (int i = 0; i < indicesModelos.length; i++) {
             Modelo m = agencia.getModelos()[indicesModelos[i]];
             evento.agregarModelos(m);
@@ -315,7 +296,7 @@ public class PanelEventos extends JPanel {
 
 
 
-    // ─── ACCIÓN: LIMPIAR ──────────────────────────────────────────────────
+    // LIMPIAR
     private void limpiarCampos() {
         txtNombre.setText("");
         txtFecha.setText("");
@@ -329,7 +310,7 @@ public class PanelEventos extends JPanel {
         cardLayout.show(panelDinamico, "Público");
     }
 
-    // ─── ACTUALIZAR COMBOS Y LISTAS ───────────────────────────────────────
+    // ACTUALIZAR COMBOS Y LISTAS
     public void actualizarCombos() {
 
         // Actualizar combo de lugares
@@ -340,8 +321,6 @@ public class PanelEventos extends JPanel {
             cbLugar.addItem(lugares[i].getNombre());
         }
 
-        // Actualizar lista de modelos
-        // DefaultListModel es el contenedor de datos de JList
         DefaultListModel<String> modelosModel = new DefaultListModel<>();
         Modelo[] modelos  = agencia.getModelos();
         int cantModelos   = agencia.getCantidadModelos();
@@ -362,7 +341,7 @@ public class PanelEventos extends JPanel {
         listaFotografosDisponibles.setModel(fotosModel);
     }
 
-    // ─── ACTUALIZAR TABLA ─────────────────────────────────────────────────
+    // ACTUALIZAR TABLA
     private void actualizarTabla() {
         modeloTabla.setRowCount(0);
 
