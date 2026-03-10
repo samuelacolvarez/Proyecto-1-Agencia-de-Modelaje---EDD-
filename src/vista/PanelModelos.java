@@ -1,5 +1,6 @@
 package vista;
 
+import excepciones.AlturaMinimaException;
 import logica.Agencia;
 import modelo.Modelo;
 import javax.swing.*;
@@ -168,41 +169,51 @@ public class PanelModelos extends JPanel {
         }
 
         // Validar que la estatura sea un número
-        float estatura;
+        Double estatura;
         try {
-            estatura = Float.parseFloat(txtEstatura.getText().trim());
+            estatura = Double.parseDouble(txtEstatura.getText().trim());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "La estatura debe ser un número (ejemplo: 1.75)",
+                    "La estatura debe ser un número (ejemplo: 1.85)",
                     "Error de formato",
                     JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        // Crear el modelo con los datos del formulario
-        Modelo nuevo = new Modelo(
-                java.util.UUID.randomUUID(),
-                txtNombre.getText().trim(),
-                txtIdentificacion.getText().trim(),
-                txtContacto.getText().trim(),
-                estatura,
-                cbCategoria.getSelectedItem().toString(),
-                chkDisponible.isSelected() ? "Sí" : "No"
-                // si el checkbox está tildado guarda "Sí", si no "No"
-        );
+        try {
+            // Crear el modelo con los datos del formulario
+            Modelo nuevo = new Modelo(
+                    java.util.UUID.randomUUID(),
+                    txtNombre.getText().trim(),
+                    txtIdentificacion.getText().trim(),
+                    txtContacto.getText().trim(),
+                    estatura,
+                    cbCategoria.getSelectedItem().toString(),
+                    chkDisponible.isSelected() ? "Sí" : "No"
+                    // si el checkbox está tildado guarda "Sí", si no "No"
+            );
+            agencia.agregarModelo(nuevo);  // agrega a la agencia y guarda en archivo
+            actualizarTabla();             // refresca la tabla visual
+            limpiarCampos();                // limpia el formulario
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Modelo registrado correctamente",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }catch (AlturaMinimaException e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "La estatura debe ser un número mayor o igual a 1.85",
+                    "Error de formato",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
 
-        agencia.agregarModelo(nuevo);  // agrega a la agencia y guarda en archivo
-        actualizarTabla();             // refresca la tabla visual
-        limpiarCampos();               // limpia el formulario
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Modelo registrado correctamente",
-                "Éxito",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+
     }
 
     // ─── ACCIÓN: ELIMINAR ─────────────────────────────────────────────────
