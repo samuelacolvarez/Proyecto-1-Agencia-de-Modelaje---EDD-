@@ -29,7 +29,6 @@ public class PanelLugares extends JPanel {
         add(crearFormulario(), BorderLayout.NORTH);
         add(crearTabla(),      BorderLayout.CENTER);
         add(crearBotones(),    BorderLayout.SOUTH);
-
         actualizarTabla();
     }
 
