@@ -11,6 +11,9 @@ public class GestorArchivos {
     // ─── GUARDAR MODELOS ──────────────────────────────────────────────────
     public static void guardarModelos(Modelo[] modelos, int cantidad) {
         try {
+            //usamos mkdirs, este crea la carpeta si aun no existe en el computador
+            new File(RUTA).mkdirs();
+
             PrintWriter pw = new PrintWriter(new FileWriter(RUTA + "modelos.txt", false));
 
             for (int i = 0; i < cantidad; i++) {
@@ -66,16 +69,19 @@ public class GestorArchivos {
     // ─── GUARDAR FOTÓGRAFOS ───────────────────────────────────────────────
     public static void guardarFotografos(Fotografo[] fotografos, int cantidad) {
         try {
+
+            new File(RUTA).mkdirs();
+
             PrintWriter pw = new PrintWriter(new FileWriter(RUTA + "fotografos.txt", false));
 
             for (int i = 0; i < cantidad; i++) {
                 Fotografo f = fotografos[i];
                 pw.println(
-                        f.getNombre() + ";" +
-                                f.getIdentificacion() + ";" +
-                                f.getContacto() + ";" +
-                                f.getEspecialidad() + ";" +
-                                f.getAniosExperiencia()
+                    f.getIdentificacion() + ";" +
+                    f.getNombre() + ";" +
+                    f.getContacto() + ";" +
+                    f.getEspecialidad() + ";" +
+                    f.getAniosExperiencia()
                 );
             }
             pw.close();
@@ -117,6 +123,9 @@ public class GestorArchivos {
     // ─── GUARDAR LUGARES ──────────────────────────────────────────────────
     public static void guardarLugares(Lugar[] lugares, int cantidad) {
         try {
+
+            new File(RUTA).mkdirs();
+
             PrintWriter pw = new PrintWriter(new FileWriter(RUTA + "lugares.txt", false));
 
             for (int i = 0; i < cantidad; i++) {
@@ -125,7 +134,8 @@ public class GestorArchivos {
                         l.getNombre() + ";" +
                                 l.getDireccion() + ";" +
                                 l.getCiudad() + ";" +
-                                l.getCapacidad() + ";"
+                                l.getCapacidad() + ";" +
+                                l.getTipo() + ";"
                 );
             }
             pw.close();
