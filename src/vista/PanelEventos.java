@@ -94,7 +94,7 @@ public class PanelEventos extends JPanel {
         txtCapacidad    = new JTextField();
         txtPatrocinador = new JTextField();
 
-        panel.add(new JLabel("Capacidad asistentes:")); panel.add(txtCapacidad);
+        panel.add(new JLabel("Capacidad modelos/fotografos:")); panel.add(txtCapacidad);
         panel.add(new JLabel("Patrocinador:"));         panel.add(txtPatrocinador);
 
         return panel;
@@ -221,7 +221,7 @@ public class PanelEventos extends JPanel {
         String tipo = cbTipoEvento.getSelectedItem().toString();
         Evento evento;
 
-        int capacidad = 0;
+        int capacidad = 20;
         if (tipo.equals("Público")) {
 
             // Validar campos de evento público
@@ -237,6 +237,12 @@ public class PanelEventos extends JPanel {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this,
                         "La capacidad debe ser un número",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(capacidad <= 0 || capacidad > 100) {
+                JOptionPane.showMessageDialog(this,
+                        "La capacidad debe estar entre 0 e 100",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -274,6 +280,12 @@ public class PanelEventos extends JPanel {
         for (int i = 0; i < indicesModelos.length; i++) {
             Modelo m = agencia.getModelos()[indicesModelos[i]];
             evento.agregarModelos(m);
+            if(!evento.agregarModelos(m)){
+                JOptionPane.showMessageDialog(this,
+                        "La cantidad de modelos es mayor a la capacidad del evento",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         // Asignar fotógrafos seleccionados en la lista
@@ -281,6 +293,12 @@ public class PanelEventos extends JPanel {
         for (int i = 0; i < indicesFotos.length; i++) {
             Fotografo f = agencia.getFotografos()[indicesFotos[i]];
             evento.agregarFotografos(f);
+            if(!evento.agregarFotografos(f)){
+                JOptionPane.showMessageDialog(this,
+                        "La cantidad de fotografos es mayor a la capacidad del evento",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         agencia.agregarEvento(evento);
