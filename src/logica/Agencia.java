@@ -29,7 +29,7 @@ public class Agencia {
         cantidadEventos    = 0;
     }
 
-    // ── Métodos para crecer cada arreglo ─────────────────────────────────
+
 
     private Modelo[] crecerArregloModelos() {
         Modelo[] nuevo = new Modelo[modelos.length * 2];
@@ -63,7 +63,7 @@ public class Agencia {
         return nuevo;
     }
 
-    // ── Métodos agregar (ahora sin límite fijo) ───────────────────────────
+
 
     public void agregarModelo(Modelo modelo) {
         if (cantidadModelos == modelos.length) {

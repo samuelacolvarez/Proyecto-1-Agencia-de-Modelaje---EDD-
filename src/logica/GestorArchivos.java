@@ -8,7 +8,6 @@ public class GestorArchivos {
 
     private static final String RUTA = "datos/";
 
-    // ─── GUARDAR MODELOS ──────────────────────────────────────────────────
     public static void guardarModelos(Modelo[] modelos, int cantidad) {
         try {
             //usamos mkdirs, este crea la carpeta si aun no existe en el computador
@@ -35,7 +34,6 @@ public class GestorArchivos {
         }
     }
 
-    // ─── CARGAR MODELOS ───────────────────────────────────────────────────
     public static int cargarModelos(Modelo[] modelos) {
         int cantidad = 0;
         try {
@@ -66,7 +64,6 @@ public class GestorArchivos {
         return cantidad;
     }
 
-    // ─── GUARDAR FOTÓGRAFOS ───────────────────────────────────────────────
     public static void guardarFotografos(Fotografo[] fotografos, int cantidad) {
         try {
 
@@ -91,7 +88,6 @@ public class GestorArchivos {
         }
     }
 
-    // ─── CARGAR FOTÓGRAFOS ────────────────────────────────────────────────
     public static int cargarFotografos(Fotografo[] fotografos) {
         int cantidad = 0;
         try {
@@ -120,7 +116,6 @@ public class GestorArchivos {
         return cantidad;
     }
 
-    // ─── GUARDAR LUGARES ──────────────────────────────────────────────────
     public static void guardarLugares(Lugar[] lugares, int cantidad) {
         try {
 
@@ -145,7 +140,7 @@ public class GestorArchivos {
         }
     }
 
-    // ─── CARGAR LUGARES ───────────────────────────────────────────────────
+
     public static int cargarLugares(Lugar[] lugares) {
         int cantidad = 0;
         try {
