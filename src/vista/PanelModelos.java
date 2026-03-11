@@ -246,9 +246,7 @@ public class PanelModelos extends JPanel {
 
     // ─── ACCIÓN: LIMPIAR CAMPOS ───────────────────────────────────────────
     private void limpiarCampos() {
-        txtCodigo.setText("");
         txtNombre.setText("");
-        txtIdentificacion.setText("");
         txtContacto.setText("");
         txtEstatura.setText("");
         cbCategoria.setSelectedIndex(0);
