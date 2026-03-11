@@ -77,6 +77,11 @@ public class PanelFotografos extends JPanel {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(anios<0){
+            JOptionPane.showMessageDialog(this, "Los años deben ser un número mayor o igual a 0",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Fotografo f = new Fotografo(
                 java.util.UUID.randomUUID(),

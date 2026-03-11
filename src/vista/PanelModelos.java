@@ -148,13 +148,12 @@ public class PanelModelos extends JPanel {
     private void registrarModelo() {
 
         // Primero validar que los campos no estén vacíos
-        if (txtCodigo.getText().trim().isEmpty() ||
-                txtNombre.getText().trim().isEmpty()) {
+        if (txtNombre.getText().trim().isEmpty()) {
 
             // JOptionPane muestra ventanas emergentes de mensaje
             JOptionPane.showMessageDialog(
                     this,                           // componente padre
-                    "Código y nombre son obligatorios",  // mensaje
+                    "el nombre es obligatorio",  // mensaje
                     "Campo vacío",                  // título
                     JOptionPane.WARNING_MESSAGE     // ícono de advertencia
             );
@@ -180,8 +179,8 @@ public class PanelModelos extends JPanel {
             Modelo nuevo = new Modelo(
                     java.util.UUID.randomUUID(),
                     txtNombre.getText().trim(),
-                    txtIdentificacion.getText().trim(),
                     txtContacto.getText().trim(),
+                    java.util.UUID.randomUUID().toString(),
                     estatura,
                     cbCategoria.getSelectedItem().toString(),
                     chkDisponible.isSelected() ? "Sí" : "No"
