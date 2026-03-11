@@ -1,5 +1,6 @@
 package vista;
 
+import excepciones.AlturaMinimaException;
 import logica.Agencia;
 import modelo.Modelo;
 import javax.swing.*;
@@ -8,8 +9,10 @@ import java.awt.*;
 
 public class PanelModelos extends JPanel {
 
+    // ─── Referencias a la agencia y componentes ───────────────────────────
     private Agencia agencia;
 
+    // Campos del formulario
     private JTextField txtCodigo;
     private JTextField txtNombre;
     private JTextField txtIdentificacion;
@@ -18,43 +21,62 @@ public class PanelModelos extends JPanel {
     private JComboBox<String> cbCategoria;
     private JCheckBox chkDisponible;
 
+    // Tabla para mostrar los modelos
     private JTable tabla;
     private DefaultTableModel modeloTabla;
+    // DefaultTableModel es el "contenido" de la tabla.
+    // JTable es la tabla visual. Son dos cosas separadas:
+    // una maneja los datos, la otra los muestra.
 
-
-    //Constructor
+    // ─── Constructor ──────────────────────────────────────────────────────
     public PanelModelos(Agencia agencia) {
         this.agencia = agencia;
 
+        // BorderLayout divide el panel en 5 zonas:
+        // NORTH, SOUTH, EAST, WEST, CENTER
         setLayout(new BorderLayout());
 
+        // Construir y agregar cada sección
         add(crearFormulario(), BorderLayout.NORTH);
         add(crearTabla(),      BorderLayout.CENTER);
         add(crearBotones(),    BorderLayout.SOUTH);
 
+        // Cargar los modelos que ya existen en la tabla
         actualizarTabla();
     }
 
-    // FORMULARIO
+    // ─── FORMULARIO ───────────────────────────────────────────────────────
     private JPanel crearFormulario() {
 
         JPanel panel = new JPanel();
+        // GridLayout(filas, columnas) organiza los componentes en cuadrícula
+        // 0 en filas significa "las que sean necesarias"
         panel.setLayout(new GridLayout(0, 2, 10, 5));
+        // 10 y 5 son los espacios horizontal y vertical entre celdas
 
         panel.setBorder(BorderFactory.createTitledBorder("Registrar Modelo"));
+        // Esto crea un borde con título alrededor del panel
+
+        // Crear campos y etiquetas
+        // Cada JLabel es el texto descriptivo
+        // Cada JTextField es el cajita donde el usuario escribe
         txtCodigo         = new JTextField();
         txtNombre         = new JTextField();
         txtIdentificacion = new JTextField();
         txtContacto       = new JTextField();
         txtEstatura       = new JTextField();
 
+        // JComboBox es un menú desplegable
         cbCategoria = new JComboBox<>(new String[]{
                 "Pasarela", "Comercial", "Fitness", "Editorial"
         });
 
+        // JCheckBox es una casilla de verificación (tildable)
         chkDisponible = new JCheckBox("Disponible");
         chkDisponible.setSelected(true); // empieza tildado por defecto
 
+        // Agregar al panel: primero la etiqueta, luego el campo
+        // GridLayout los organiza de izquierda a derecha, arriba a abajo
         panel.add(new JLabel("Código:"));
         panel.add(txtCodigo);
 
@@ -79,7 +101,7 @@ public class PanelModelos extends JPanel {
         return panel;
     }
 
-    // TABLA
+    // ─── TABLA ────────────────────────────────────────────────────────────
     private JScrollPane crearTabla() {
 
         // Definir los nombres de las columnas
@@ -88,6 +110,8 @@ public class PanelModelos extends JPanel {
                 "Contacto", "Estatura", "Categoría", "Disponible"
         };
 
+        // DefaultTableModel maneja los datos de la tabla
+        // false al final significa que el usuario NO puede editar las celdas
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -96,19 +120,26 @@ public class PanelModelos extends JPanel {
         };
 
         tabla = new JTable(modeloTabla);
+        // JTable recibe el modelo de datos y lo muestra visualmente
 
+        // JScrollPane agrega barras de desplazamiento a la tabla
+        // Sin esto, si hay muchos registros no podrías verlos todos
         return new JScrollPane(tabla);
     }
 
-    //BOTONES
+    // ─── BOTONES ──────────────────────────────────────────────────────────
     private JPanel crearBotones() {
+
         JPanel panel = new JPanel();
+        // FlowLayout acomoda los componentes uno al lado del otro
         panel.setLayout(new FlowLayout());
 
         JButton btnRegistrar = new JButton("Registrar Modelo");
         JButton btnEliminar  = new JButton("Eliminar Modelo");
         JButton btnLimpiar   = new JButton("Limpiar Campos");
 
+        // ActionListener es lo que pasa cuando presionas el botón
+        // La flecha -> es una forma corta de escribir el listener
         btnRegistrar.addActionListener(e -> registrarModelo());
         btnEliminar.addActionListener(e  -> eliminarModelo());
         btnLimpiar.addActionListener(e   -> limpiarCampos());
@@ -120,7 +151,7 @@ public class PanelModelos extends JPanel {
         return panel;
     }
 
-    // REGISTROS
+    // ─── ACCIÓN: REGISTRAR ────────────────────────────────────────────────
     private void registrarModelo() {
 
         // Primero validar que los campos no estén vacíos
@@ -134,46 +165,58 @@ public class PanelModelos extends JPanel {
                     "Campo vacío",                  // título
                     JOptionPane.WARNING_MESSAGE     // ícono de advertencia
             );
-            return;
+            return; // corta la ejecución si falta algo
         }
 
-        float estatura;
+        // Validar que la estatura sea un número
+        Double estatura;
         try {
-            estatura = Float.parseFloat(txtEstatura.getText().trim());
+            estatura = Double.parseDouble(txtEstatura.getText().trim());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "La estatura debe ser un número (ejemplo: 1.75)",
+                    "La estatura debe ser un número (ejemplo: 1.85)",
                     "Error de formato",
                     JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        // Crear el modelo con los datos del formulario
-        Modelo nuevo = new Modelo(
-                java.util.UUID.randomUUID(),
-                txtNombre.getText().trim(),
-                txtIdentificacion.getText().trim(),
-                txtContacto.getText().trim(),
-                estatura,
-                cbCategoria.getSelectedItem().toString(),
-                chkDisponible.isSelected() ? "Sí" : "No"
-        );
+        try {
+            // Crear el modelo con los datos del formulario
+            Modelo nuevo = new Modelo(
+                    java.util.UUID.randomUUID(),
+                    txtNombre.getText().trim(),
+                    txtIdentificacion.getText().trim(),
+                    txtContacto.getText().trim(),
+                    estatura,
+                    cbCategoria.getSelectedItem().toString(),
+                    chkDisponible.isSelected() ? "Sí" : "No"
+                    // si el checkbox está tildado guarda "Sí", si no "No"
+            );
+            agencia.agregarModelo(nuevo);  // agrega a la agencia y guarda en archivo
+            actualizarTabla();             // refresca la tabla visual
+            limpiarCampos();                // limpia el formulario
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Modelo registrado correctamente",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }catch (AlturaMinimaException e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "La estatura debe ser un número mayor o igual a 1.8",
+                    "Error de formato",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
 
-        agencia.agregarModelo(nuevo);
-        actualizarTabla();
-        limpiarCampos();
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Modelo registrado correctamente",
-                "Éxito",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+
     }
 
-    // ELIMINAR
+    // ─── ACCIÓN: ELIMINAR ─────────────────────────────────────────────────
     private void eliminarModelo() {
 
         // getSelectedRow() devuelve el índice de la fila seleccionada
@@ -190,7 +233,7 @@ public class PanelModelos extends JPanel {
             return;
         }
 
-        // Obtener el código de la fila seleccionada
+        // Obtener el código de la fila seleccionada (columna 0)
         String codigo = modeloTabla.getValueAt(filaSeleccionada, 0).toString();
 
         // Confirmar antes de eliminar
@@ -208,7 +251,7 @@ public class PanelModelos extends JPanel {
         }
     }
 
-    // LIMPIAR CAMPOS
+    // ─── ACCIÓN: LIMPIAR CAMPOS ───────────────────────────────────────────
     private void limpiarCampos() {
         txtCodigo.setText("");
         txtNombre.setText("");
@@ -219,17 +262,21 @@ public class PanelModelos extends JPanel {
         chkDisponible.setSelected(true);
     }
 
-    //ACTUALIZAR TABLA
+    //─── ACTUALIZAR TABLA ─────────────────────────────────────────────────
     private void actualizarTabla() {
 
+        // Primero borra todas las filas actuales de la tabla
         modeloTabla.setRowCount(0);
 
+        // Luego vuelve a llenarla con los datos actuales de la agencia
         Modelo[] modelos = agencia.getModelos();
         int cantidad     = agencia.getCantidadModelos();
 
         for (int i = 0; i < cantidad; i++) {
             Modelo m = modelos[i];
 
+            // addRow agrega una fila con un arreglo de objetos
+            // el orden debe coincidir con el orden de las columnas
             modeloTabla.addRow(new Object[]{
                     m.getCodigo(),
                     m.getNombre(),

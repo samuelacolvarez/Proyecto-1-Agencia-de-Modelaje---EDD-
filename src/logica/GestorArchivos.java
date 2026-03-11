@@ -49,7 +49,7 @@ public class GestorArchivos {
                         partes[1],
                         partes[2],
                         partes[3],
-                        Float.parseFloat(partes[4]),
+                        Double.parseDouble(partes[4]),
                         partes[5],
                         partes[6]
                 );

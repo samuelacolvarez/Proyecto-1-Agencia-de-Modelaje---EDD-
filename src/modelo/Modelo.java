@@ -6,17 +6,17 @@ import java.util.UUID;
 
 public class Modelo extends Persona {
     public String codigo;
-    public float estatura;
+    public Double estatura;
     public String Categoria;
     public String disponibilidad;
 
-    public Modelo(UUID identificacion, String nombre, String contacto, String codigo, float estatura, String categoria, String disponibilidad)throws AlturaMinimaException {
+    public Modelo(UUID identificacion, String nombre, String contacto, String codigo, Double estatura, String categoria, String disponibilidad)throws AlturaMinimaException {
             super(identificacion, nombre, contacto);
-        if(this.estatura<1.8f){
-            throw new AlturaMinimaException("el modelo debe medir mas de 1.80 metros");
-        }
         this.codigo = UUID.randomUUID().toString();
         this.estatura = estatura;
+        if(this.estatura<1.8){
+            throw new AlturaMinimaException("el modelo debe medir mas de 1.80 metros");
+        }
         Categoria = categoria;
         this.disponibilidad = disponibilidad;
     }
@@ -29,11 +29,11 @@ public class Modelo extends Persona {
         this.codigo = codigo;
     }
 
-    public float getEstatura() {
+    public Double getEstatura() {
         return estatura;
     }
 
-    public void setEstatura(float estatura) {
+    public void setEstatura(Double estatura) {
         this.estatura = estatura;
     }
 

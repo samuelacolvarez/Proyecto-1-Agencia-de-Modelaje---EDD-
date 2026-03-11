@@ -102,12 +102,17 @@ public class PanelFotografos extends JPanel {
                     "Sin selección", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String nombre = modeloTabla.getValueAt(fila, 0).toString();
-        int confirmacion = JOptionPane.showConfirmDialog(this,
-                "¿Eliminar a " + nombre + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        String identificacion = modeloTabla.getValueAt(fila, 1).toString();
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Eliminar a " + identificacion + "?",
+                "Confirmar", JOptionPane.YES_NO_OPTION
+        );
+
         if (confirmacion == JOptionPane.YES_OPTION) {
-            agencia.eliminarFotografo(nombre);
+            agencia.eliminarFotografo(identificacion);
             actualizarTabla();
+            JOptionPane.showMessageDialog(this, "Fotografo eliminado");
         }
     }
 

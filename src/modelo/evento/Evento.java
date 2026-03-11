@@ -34,20 +34,24 @@ public abstract class Evento {
     public abstract void mostrarDetalles();
     public abstract String tipoEvento();
 
-    public void agregarModelos(Modelo modelo){
+    public boolean agregarModelos(Modelo modelo){
         if(contadorModelos < modelos.length){
             modelos[contadorModelos] = modelo;
             contadorModelos++;
+            return true;
         }else{
             System.out.println("No se pueden agregar más modelo");
+            return false;
         }
     }
-    public void agregarFotografos(Fotografo fotografo){
+    public boolean agregarFotografos(Fotografo fotografo){
         if(contadorFotografos < fotografos.length){
             fotografos[contadorFotografos] = fotografo;
             contadorFotografos++;
+            return true;
         }else{
             System.out.println("No se pueden agregar fotografo");
+            return false;
         }
     }
 }
