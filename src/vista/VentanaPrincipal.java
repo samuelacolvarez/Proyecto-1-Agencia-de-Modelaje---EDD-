@@ -20,7 +20,7 @@ public class VentanaPrincipal extends JFrame {
 
         setTitle("Agencia No Más Enanos Por Favor");
         setSize(900, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             // windowClosing se ejecuta justo cuando el usuario presiona la X
             @Override
