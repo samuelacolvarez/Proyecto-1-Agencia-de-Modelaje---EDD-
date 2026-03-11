@@ -101,7 +101,7 @@ public class Agencia {
     public void eliminarModelo(String codigo){
         for (int i = 0; i < cantidadModelos; i++) {
             if(modelos[i].getCodigo().equals(codigo)){
-                for (int j = 0; j < cantidadModelos; j++) {
+                for (int j = i; j < cantidadModelos -1; j++) {
                     modelos[j] =  modelos[j+1];
                 }
                 cantidadModelos--;
@@ -112,8 +112,8 @@ public class Agencia {
     public void eliminarFotografo(String identificacion){
         for (int i = 0; i < cantidadFotografos; i++) {
             if(fotografos[i].getIdentificacion().equals(identificacion)){
-                for (int j = 0; j < cantidadFotografos; j++) {
-                    fotografos[i] =  fotografos[j+1];
+                for (int j = i; j < cantidadFotografos -1; j++) {
+                    fotografos[j] =  fotografos[j+1];
                 }
                 cantidadFotografos--;
                 break;
