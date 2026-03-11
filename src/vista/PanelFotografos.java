@@ -31,13 +31,11 @@ public class PanelFotografos extends JPanel {
         panel.setBorder(BorderFactory.createTitledBorder("Registrar Fotógrafo"));
 
         txtNombre         = new JTextField();
-        txtIdentificacion = new JTextField();
         txtContacto       = new JTextField();
         txtEspecialidad   = new JTextField();
         txtAnios          = new JTextField();
 
         panel.add(new JLabel("Nombre:"));         panel.add(txtNombre);
-        panel.add(new JLabel("Identificación:")); panel.add(txtIdentificacion);
         panel.add(new JLabel("Contacto:"));       panel.add(txtContacto);
         panel.add(new JLabel("Especialidad:"));   panel.add(txtEspecialidad);
         panel.add(new JLabel("Años exp:"));       panel.add(txtAnios);
@@ -89,7 +87,7 @@ public class PanelFotografos extends JPanel {
         );
         agencia.agregarFotografo(f);
         actualizarTabla();
-        txtNombre.setText(""); txtIdentificacion.setText("");
+        txtNombre.setText("");
         txtContacto.setText(""); txtEspecialidad.setText("");
         txtAnios.setText("");
         JOptionPane.showMessageDialog(this, "Fotógrafo registrado");
