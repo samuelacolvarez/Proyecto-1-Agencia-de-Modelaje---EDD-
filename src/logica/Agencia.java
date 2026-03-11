@@ -17,11 +17,11 @@ public class Agencia {
     private int cantidadEventos;
 
     public Agencia() {
-        // Arrancamos con 10, pero pueden crecer solos
-        modelos    = new Modelo[10];
-        fotografos = new Fotografo[10];
-        lugares    = new Lugar[10];
-        eventos    = new Evento[10];
+
+        modelos    = new Modelo[100];
+        fotografos = new Fotografo[100];
+        lugares    = new Lugar[100];
+        eventos    = new Evento[100];
 
         cantidadModelos    = GestorArchivos.cargarModelos(modelos);
         cantidadFotografos = GestorArchivos.cargarFotografos(fotografos);

@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
 
 public class VentanaPrincipal extends JFrame {
 
-    // JFrame es la ventana en sí. Al heredar de ella, la clase VentanaPrincipal ES una ventana.
+
 
     private Agencia agencia;
 
@@ -26,7 +26,7 @@ public class VentanaPrincipal extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
 
-                // Antes de cerrar, guardamos todo en los archivos .txt
+
                 GestorArchivos.guardarModelos(
                         agencia.getModelos(),
                         agencia.getCantidadModelos()
