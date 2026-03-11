@@ -17,15 +17,21 @@ public class Agencia {
 
     private int capacidaMaxima = 100;
     public Agencia(){
-        modelos = new Modelo[capacidaMaxima];
-        fotografos = new Fotografo[capacidaMaxima];
-        eventos = new Evento[capacidaMaxima];
-        lugares = new Lugar[capacidaMaxima];
+        // Creamos los arreglos vacíos con capacidad para 100 elementos cada uno
+        modelos    = new Modelo[100];
+        fotografos = new Fotografo[100];
+        lugares    = new Lugar[100];
+        eventos    = new Evento[100];
 
-        cantidadModelos = 0;
-        cantidadFotografos = 0;
+        // Cargamos los datos guardados y guardamos cuántos se cargaron
+        // Si el archivo no existe, devuelve 0 y los arreglos quedan vacíos
+        cantidadModelos    = GestorArchivos.cargarModelos(modelos);
+        cantidadFotografos = GestorArchivos.cargarFotografos(fotografos);
+        cantidadlugares    = GestorArchivos.cargarLugares(lugares);
+
+        // Los eventos no se persisten en GestorArchivos,
+        // así que siempre arrancan en 0 al abrir el programa
         cantidadEventos = 0;
-        cantidadlugares = 0;
     }
 
     public Modelo[] getModelos() {
