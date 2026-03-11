@@ -60,9 +60,7 @@ public class PanelModelos extends JPanel {
         // Crear campos y etiquetas
         // Cada JLabel es el texto descriptivo
         // Cada JTextField es el cajita donde el usuario escribe
-        txtCodigo         = new JTextField();
         txtNombre         = new JTextField();
-        txtIdentificacion = new JTextField();
         txtContacto       = new JTextField();
         txtEstatura       = new JTextField();
 
@@ -77,14 +75,9 @@ public class PanelModelos extends JPanel {
 
         // Agregar al panel: primero la etiqueta, luego el campo
         // GridLayout los organiza de izquierda a derecha, arriba a abajo
-        panel.add(new JLabel("Código:"));
-        panel.add(txtCodigo);
 
         panel.add(new JLabel("Nombre:"));
         panel.add(txtNombre);
-
-        panel.add(new JLabel("Identificación:"));
-        panel.add(txtIdentificacion);
 
         panel.add(new JLabel("Contacto:"));
         panel.add(txtContacto);
